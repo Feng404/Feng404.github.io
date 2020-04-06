@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="实现效果文章上传页面 文章列表页面">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue2-Editor+SpringBoot+Oracle实现文章上传显示">
+<meta property="og:url" content="http://yoursite.com/2020/04/06/Vue2-Editor-SpringBoot-Oracle%E5%AE%9E%E7%8E%B0%E6%96%87%E7%AB%A0%E4%B8%8A%E4%BC%A0%E6%98%BE%E7%A4%BA/index.html">
+<meta property="og:site_name" content="DayLight">
+<meta property="og:description" content="实现效果文章上传页面 文章列表页面">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200406133418139.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZpbmFsbHlfZmx4,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200406133553136.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZpbmFsbHlfZmx4,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200406133735352.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZpbmFsbHlfZmx4,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2020-04-06T06:06:35.000Z">
+<meta property="article:modified_time" content="2020-04-06T06:08:45.360Z">
+<meta property="article:author" content="kalinda">
+<meta property="article:tag" content="Vue2-Editor">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="Oracle">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200406133418139.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZpbmFsbHlfZmx4,size_16,color_FFFFFF,t_70">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/06/Vue2-Editor-SpringBoot-Oracle%E5%AE%9E%E7%8E%B0%E6%96%87%E7%AB%A0%E4%B8%8A%E4%BC%A0%E6%98%BE%E7%A4%BA/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Vue2-Editor+SpringBoot+Oracle实现文章上传显示 | DayLight</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">    
+      <a href="https://github.com/Feng404" target="_blank" rel="noopener">
+        <img width="120" height="120" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_white_ffffff.png?resize=149%2C149" style="position: absolute; top: 0; right: 0; border: 0; float: right " data-recalc-dims="1">
+      </a>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DayLight</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">技术搬运工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/06/Vue2-Editor-SpringBoot-Oracle%E5%AE%9E%E7%8E%B0%E6%96%87%E7%AB%A0%E4%B8%8A%E4%BC%A0%E6%98%BE%E7%A4%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cn.bing.com/th?id=OIP.UDMxZWKA43MAVttEe4-v9gAAAA&pid=Api&rs=1">
+      <meta itemprop="name" content="kalinda">
+      <meta itemprop="description" content="知世故而不世故，才是最善良的成熟">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DayLight">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue2-Editor+SpringBoot+Oracle实现文章上传显示
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-06 14:06:35 / 修改时间：14:08:45" itemprop="dateCreated datePublished" datetime="2020-04-06T14:06:35+08:00">2020-04-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue-SpringBoot/" itemprop="url" rel="index"><span itemprop="name">Vue+SpringBoot</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h3><h4 id="文章上传页面"><a href="#文章上传页面" class="headerlink" title="文章上传页面"></a>文章上传页面</h4><p><img src="https://img-blog.csdnimg.cn/20200406133418139.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZpbmFsbHlfZmx4,size_16,color_FFFFFF,t_70" alt="上传图片页面"></p>
+<h4 id="文章列表页面"><a href="#文章列表页面" class="headerlink" title="文章列表页面"></a>文章列表页面</h4><a id="more"></a>
+<p><strong>可以通过文章ID、文章标题模糊查询文章</strong><br><img src="https://img-blog.csdnimg.cn/20200406133553136.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZpbmFsbHlfZmx4,size_16,color_FFFFFF,t_70" alt="文章列表"></p>
+<h4 id="查看文章详细信息"><a href="#查看文章详细信息" class="headerlink" title="查看文章详细信息"></a>查看文章详细信息</h4><p><strong>点击文章列表即可以查看文章详细信息</strong><br><img src="https://img-blog.csdnimg.cn/20200406133735352.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZpbmFsbHlfZmx4,size_16,color_FFFFFF,t_70" alt="显示文章详细信息"></p>
+<h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><h4 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h4><h5 id="文章上传页面-1"><a href="#文章上传页面-1" class="headerlink" title="文章上传页面"></a>文章上传页面</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"containDiv"</span>&gt;</span><br><span class="line">      &lt;el-row :gutter=<span class="string">"5"</span>&gt;</span><br><span class="line">        &lt;el-col :span=<span class="string">"4"</span>&gt;</span><br><span class="line">          &lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">"articleText"</span>&gt;文章标题&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>el-col&gt;</span><br><span class="line">        &lt;el-col :span=<span class="string">"20"</span>&gt;</span><br><span class="line">          &lt;el-input v-model=<span class="string">"articleTitle"</span>&gt;&lt;<span class="regexp">/el-input&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>el-col&gt;</span><br><span class="line">      &lt;<span class="regexp">/el-row&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;el-row :gutter="5"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;el-col :span="4"&gt;</span></span><br><span class="line"><span class="regexp">          &lt;span class="articleText"&gt;文章摘要&lt;/</span>span&gt;</span><br><span class="line">        &lt;<span class="regexp">/el-col&gt;</span></span><br><span class="line"><span class="regexp">        &lt;el-col :span="20"&gt;</span></span><br><span class="line"><span class="regexp">          &lt;el-input type="textarea" v-model="articleAbstract" :rows="4" @input="showAbstartTip"&gt;&lt;/</span>el-input&gt;</span><br><span class="line">        &lt;<span class="regexp">/el-col&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>el-row&gt;</span><br><span class="line"></span><br><span class="line">      &lt;vue-editor</span><br><span class="line">        id=<span class="string">"editor"</span></span><br><span class="line">        useCustomImageHandler</span><br><span class="line">        @image-added=<span class="string">"handleImageAdded"</span></span><br><span class="line">        @text-change=<span class="string">"showContentTip"</span></span><br><span class="line">        v-model=<span class="string">"articleContent"</span></span><br><span class="line">      &gt;&lt;<span class="regexp">/vue-editor&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"containDiv"</span>&gt;</span><br><span class="line">      &lt;el-button type=<span class="string">"success"</span> plain id=<span class="string">"uploadArticle"</span> @click=<span class="string">"uploadArticle"</span>&gt;</span><br><span class="line">        上传</span><br><span class="line">        &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-icon-upload el-icon--right"</span>&gt;&lt;<span class="regexp">/i&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>el-button&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &lt;div id="preview"&gt;预览效果&lt;/</span>div&gt;</span><br><span class="line">    &lt;div id=<span class="string">"previewArticle"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"containDiv"</span>&gt;</span><br><span class="line">      &lt;div v-html=<span class="string">"articleTitle"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"previewArticleTitle"</span>&gt;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;p class="abstract" v-show="isShowAbstract"&gt;摘要&lt;/</span>p&gt;</span><br><span class="line">      &lt;p v-html=<span class="string">"articleAbstract"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"previewArticleAbstract"</span>&gt;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;p class="abstract" v-show="isShowContent"&gt;文章内容&lt;/</span>p&gt;</span><br><span class="line">      &lt;p v-html=<span class="string">"articleContent"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"previewArticleContent"</span>&gt;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> &#123; VueEditor &#125; <span class="keyword">from</span> <span class="string">"vue2-editor"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> baseURL = <span class="string">"http://localhost:8888"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">"uploadArticle"</span>,</span><br><span class="line">  components: &#123; VueEditor &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      articleContent: <span class="string">""</span>,</span><br><span class="line">      articleTitle: <span class="string">""</span>,</span><br><span class="line">      articleAbstract: <span class="string">""</span>,</span><br><span class="line"></span><br><span class="line">      isShowAbstract: <span class="literal">false</span>,</span><br><span class="line">      isShowContent: <span class="literal">false</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    showAbstartTip() &#123;</span><br><span class="line">      <span class="keyword">this</span>.isShowAbstract = <span class="literal">true</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    showContentTip() &#123;</span><br><span class="line">      <span class="keyword">this</span>.isShowContent = <span class="literal">true</span>;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    uploadArticle() &#123;</span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>.articleTitle == <span class="literal">null</span> || <span class="keyword">this</span>.articleTitle.trim() == <span class="string">""</span>)&#123;</span><br><span class="line">         <span class="keyword">this</span>.$notify.error(&#123;</span><br><span class="line">          title: <span class="string">'错误'</span>,</span><br><span class="line">          message: <span class="string">'请输入文章题目'</span></span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">this</span>.$http(&#123;</span><br><span class="line">        url: baseURL + <span class="string">"/article/uploadArticle"</span>,</span><br><span class="line">        method: <span class="string">"post"</span>,</span><br><span class="line">        params: &#123;</span><br><span class="line">          articleContent: <span class="keyword">this</span>.articleContent,</span><br><span class="line">          articleTitle: <span class="keyword">this</span>.articleTitle,</span><br><span class="line">          articleAbstract: <span class="keyword">this</span>.articleAbstract</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">        .then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (response.data == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.$notify(&#123;</span><br><span class="line">              title: <span class="string">"上传成功"</span>,</span><br><span class="line">              message: <span class="string">"文章上传成功"</span>,</span><br><span class="line">              type: <span class="string">"success"</span></span><br><span class="line">            &#125;);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">this</span>.articleTitle = <span class="string">""</span>;</span><br><span class="line">            <span class="keyword">this</span>.articleAbstract = <span class="string">""</span>;</span><br><span class="line">            <span class="keyword">this</span>.articleContent = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.isShowContent = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">this</span>.isShowAbstract = <span class="literal">false</span>;</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.$notify.error(&#123;</span><br><span class="line">              title: <span class="string">"上传失败"</span>,</span><br><span class="line">              message: <span class="string">"文章上传失败！"</span></span><br><span class="line">            &#125;);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(error);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    handleImageAdded(file, Editor, cursorLocation) &#123;</span><br><span class="line">      <span class="keyword">let</span> formData = <span class="keyword">new</span> FormData();</span><br><span class="line">      formData.append(<span class="string">"file"</span>, file);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">this</span>.axios(&#123;</span><br><span class="line">        url: baseURL + <span class="string">"/article/uploadImage"</span>,</span><br><span class="line">        method: <span class="string">"POST"</span>,</span><br><span class="line">        data: formData</span><br><span class="line">      &#125;)</span><br><span class="line">        .then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">let</span> url = response.data;</span><br><span class="line">          Editor.insertEmbed(cursorLocation, <span class="string">"image"</span>, url);</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(error);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;style&gt;</span></span><br><span class="line"><span class="regexp">.containDiv &#123;</span></span><br><span class="line"><span class="regexp">  position: relative;</span></span><br><span class="line"><span class="regexp">  width: 75%;</span></span><br><span class="line"><span class="regexp">  margin: 0 auto;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">#editor &#123;</span></span><br><span class="line"><span class="regexp">  height: 500px;</span></span><br><span class="line"><span class="regexp">  width: 100%;</span></span><br><span class="line"><span class="regexp">  margin: 0 auto;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">#uploadArticle &#123;</span></span><br><span class="line"><span class="regexp">  position: relative;</span></span><br><span class="line"><span class="regexp">  top: 20px;</span></span><br><span class="line"><span class="regexp">  left: 45%;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">#preview &#123;</span></span><br><span class="line"><span class="regexp">  position: relative;</span></span><br><span class="line"><span class="regexp">  right: 35%;</span></span><br><span class="line"><span class="regexp">  top: 20px;</span></span><br><span class="line"><span class="regexp">  bottom: 20px;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">#previewArticle &#123;</span></span><br><span class="line"><span class="regexp">  margin-top: 40px;</span></span><br><span class="line"><span class="regexp">  border: 1px solid #f0f0f0;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">.el-row &#123;</span></span><br><span class="line"><span class="regexp">  margin-bottom: 20px;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">.el-col &#123;</span></span><br><span class="line"><span class="regexp">  border-radius: 4px;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">.articleText &#123;</span></span><br><span class="line"><span class="regexp">  position: relative;</span></span><br><span class="line"><span class="regexp">  right: 20%;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">.previewArticleTitle &#123;</span></span><br><span class="line"><span class="regexp">  text-align: center;</span></span><br><span class="line"><span class="regexp">  font-size: 25px;</span></span><br><span class="line"><span class="regexp">  font-weight: bold;</span></span><br><span class="line"><span class="regexp">  margin-top: 10px;</span></span><br><span class="line"><span class="regexp">  margin-bottom: 20px;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">.abstract &#123;</span></span><br><span class="line"><span class="regexp">  text-align: left;</span></span><br><span class="line"><span class="regexp">  font-weight: bold;</span></span><br><span class="line"><span class="regexp">  font-weight: 20px;</span></span><br><span class="line"><span class="regexp">  margin-left: 20px;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">.previewArticleAbstract &#123;</span></span><br><span class="line"><span class="regexp">  margin-left: 20px;</span></span><br><span class="line"><span class="regexp">  margin-right: 20px;</span></span><br><span class="line"><span class="regexp">  text-align: justify;</span></span><br><span class="line"><span class="regexp">  font-size: 16px;</span></span><br><span class="line"><span class="regexp">  text-indent: 2em;</span></span><br><span class="line"><span class="regexp">  color: #4f4f4f;</span></span><br><span class="line"><span class="regexp">  margin-bottom: 40px;  </span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">.previewArticleContent &#123;</span></span><br><span class="line"><span class="regexp">  margin-left: 20px;  </span></span><br><span class="line"><span class="regexp">  margin-right: 20px;</span></span><br><span class="line"><span class="regexp">  text-align: justify;</span></span><br><span class="line"><span class="regexp">  text-indent: 2em;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="文章列表页面-1"><a href="#文章列表页面-1" class="headerlink" title="文章列表页面"></a>文章列表页面</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"containDiv"</span>&gt;</span><br><span class="line">    &lt;el-form :ref=<span class="string">"articleSearchConditon"</span> :model=<span class="string">"articleSearchConditon"</span>&gt;</span><br><span class="line">      &lt;el-row&gt;</span><br><span class="line">        &lt;el-col <span class="class"><span class="keyword">class</span></span>=<span class="string">"colWidth"</span>&gt;</span><br><span class="line">          &lt;el-form-item label=<span class="string">"文章ID"</span> prop=<span class="string">"articleId"</span>&gt;</span><br><span class="line">            &lt;el-input v-model=<span class="string">"articleSearchConditon.articleId"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"elWidth"</span> /&gt;</span><br><span class="line">          &lt;<span class="regexp">/el-form-item&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>el-col&gt;</span><br><span class="line"></span><br><span class="line">        &lt;el-col <span class="class"><span class="keyword">class</span></span>=<span class="string">"colWidth"</span>&gt;</span><br><span class="line">          &lt;el-form-item label=<span class="string">"文章标题"</span> prop=<span class="string">"articleTitle"</span>&gt;</span><br><span class="line">            &lt;el-input v-model=<span class="string">"articleSearchConditon.articleTitle"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"elWidth"</span>&gt;&lt;<span class="regexp">/el-input&gt;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>el-form-item&gt;</span><br><span class="line">        &lt;<span class="regexp">/el-col&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;el-col :span="6" id="colButton"&gt;</span></span><br><span class="line"><span class="regexp">          &lt;el-form-item&gt;</span></span><br><span class="line"><span class="regexp">            &lt;el-button type="success" plain @click="getArticleList"&gt;查询&lt;/</span>el-button&gt;</span><br><span class="line">            &lt;el-button @click=<span class="string">"doClear"</span>&gt;清空&lt;<span class="regexp">/el-button&gt;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>el-form-item&gt;</span><br><span class="line">        &lt;<span class="regexp">/el-col&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>el-row&gt;</span><br><span class="line">    &lt;<span class="regexp">/el-form&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &lt;ul id="outerUL"&gt;</span></span><br><span class="line"><span class="regexp">      &lt;ul</span></span><br><span class="line"><span class="regexp">        v-for="article in articleList"</span></span><br><span class="line"><span class="regexp">        v-bind:key="article.articleId"</span></span><br><span class="line"><span class="regexp">        @click="downloadArticleById(article.articleId, article.articleTitle, article.articleAbstract)"</span></span><br><span class="line"><span class="regexp">      &gt;</span></span><br><span class="line"><span class="regexp">        &lt;li class="articleTitleLi"&gt;&#123;&#123; article.articleTitle &#125;&#125;&lt;/</span>li&gt;</span><br><span class="line"></span><br><span class="line">        &lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">"articleCreateDateLi"</span>&gt;</span><br><span class="line">          &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-icon-timer"</span>&gt;&#123;&#123; article.articleCreateDate &#125;&#125;&lt;<span class="regexp">/i&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>span&gt;</span><br><span class="line">        &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">"articleAbstractLi"</span>&gt;</span><br><span class="line">          &lt;a&gt;&#123;&#123; article.articleAbstract &#125;&#125;&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>li&gt;</span><br><span class="line">      &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/u</span>l&gt;</span><br><span class="line"></span><br><span class="line">    &lt;el-pagination</span><br><span class="line">      @size-change=<span class="string">"sizeChangeHandle"</span></span><br><span class="line">      @current-change=<span class="string">"currentChangeHandle"</span></span><br><span class="line">      :current-page=<span class="string">"pageIndex"</span></span><br><span class="line">      :page-sizes=<span class="string">"[5, 10, 20, 50, 100]"</span></span><br><span class="line">      :page-size=<span class="string">"pageSize"</span></span><br><span class="line">      :total=<span class="string">"totalPage"</span></span><br><span class="line">      layout=<span class="string">"total, sizes, prev, pager, next, jumper"</span></span><br><span class="line">    /&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;div ref=<span class="string">"viewArticleContent"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"viewArticleById"</span>&gt;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">let</span> baseURL = <span class="string">"http://localhost:8888"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">"articleList"</span>,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      articleSearchConditon: &#123;</span><br><span class="line">        articleId: <span class="string">""</span>,</span><br><span class="line">        articleTitle: <span class="string">""</span></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      articleList: [],</span><br><span class="line"></span><br><span class="line">      pageIndex: <span class="number">1</span>,</span><br><span class="line">      pageSize: <span class="number">5</span>,</span><br><span class="line">      totalPage: <span class="number">0</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    <span class="keyword">this</span>.getArticleList();</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getArticleList() &#123;</span><br><span class="line">      <span class="keyword">this</span>.$http(&#123;</span><br><span class="line">        url: baseURL + <span class="string">"/article/getArticleList"</span>,</span><br><span class="line">        method: <span class="string">"post"</span>,</span><br><span class="line">        params: &#123;</span><br><span class="line">          articleId: <span class="keyword">this</span>.articleSearchConditon.articleId,</span><br><span class="line">          articleTitle: <span class="keyword">this</span>.articleSearchConditon.articleTitle,</span><br><span class="line">          pageIndex: <span class="keyword">this</span>.pageIndex,</span><br><span class="line">          pageSize: <span class="keyword">this</span>.pageSize</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">        .then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.articleList = response.data.records;</span><br><span class="line">          <span class="keyword">this</span>.totalPage = response.data.total;</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(error);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    downloadArticleById(articleId, articleTitle, articleAbstract) &#123;</span><br><span class="line">      <span class="keyword">this</span>.$http(&#123;</span><br><span class="line">        url: baseURL + <span class="string">"/article/downloadArticleById"</span>,</span><br><span class="line">        method: <span class="string">"post"</span>,</span><br><span class="line">        params: &#123;</span><br><span class="line">          articleId: articleId</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">        .then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">let</span> title = <span class="string">"&lt;h2&gt;"</span> + articleTitle + <span class="string">"&lt;/h2&gt;"</span>;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">let</span> abstract =</span><br><span class="line">            <span class="string">"&lt;p style = 'text-align: left; font-weight: bold; font-weight: 20px; margin-left: 20px;'&gt;摘要 &lt;/p&gt;"</span> +</span><br><span class="line">            <span class="string">"&lt;p style = 'margin-left: 10px;  margin-right: 20px; text-align: justify; font-size: 14px; text-indent: 2em;  color: #4f4f4f;  margin-bottom: 20px;'&gt;"</span> +</span><br><span class="line">            articleAbstract +</span><br><span class="line">            <span class="string">"&lt;/p&gt;"</span>;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">let</span> content =</span><br><span class="line">            <span class="string">"&lt;p style = 'margin-left: 20px; text-align: justify; font-weight: bold;' &gt; 文章内容&lt;/p&gt;"</span> +</span><br><span class="line">            <span class="string">"&lt;div style = 'margin-left: 20px;  text-align: justify;  text-indent: 2em; margin-right: 20px;'&gt;"</span> +</span><br><span class="line">            response.data.articleContent +</span><br><span class="line">            <span class="string">"&lt;/div&gt;"</span>;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">this</span>.$refs.viewArticleContent.innerHTML = title + abstract + content;</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(error);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    doClear() &#123;</span><br><span class="line">      <span class="keyword">this</span>.articleSearchConditon = &#123;&#125;;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    sizeChangeHandle(val) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`每页 <span class="subst">$&#123;val&#125;</span> 条`</span>);</span><br><span class="line">      <span class="keyword">this</span>.pageIndex = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">this</span>.pageSize = val;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">this</span>.getArticleList();</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    currentChangeHandle(val) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`当前页: <span class="subst">$&#123;val&#125;</span>`</span>);</span><br><span class="line">      <span class="keyword">this</span>.pageIndex = val;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">this</span>.getArticleList();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;style scoped&gt;</span></span><br><span class="line"><span class="regexp">.el-col .el-row .el-form-item .el-form .p .div &#123;</span></span><br><span class="line"><span class="regexp">  margin: 0;</span></span><br><span class="line"><span class="regexp">  padding: 0;</span></span><br><span class="line"><span class="regexp">  border: 0;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">.colWidth &#123;</span></span><br><span class="line"><span class="regexp">  width: 458px;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">.elWidth &#123;</span></span><br><span class="line"><span class="regexp">  width: 340px;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">#colButton &#123;</span></span><br><span class="line"><span class="regexp">  width: 200px;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">.containDiv &#123;</span></span><br><span class="line"><span class="regexp">  position: relative;</span></span><br><span class="line"><span class="regexp">  width: 75%;</span></span><br><span class="line"><span class="regexp">  margin: 0 auto;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">#outerUL &#123;</span></span><br><span class="line"><span class="regexp">  position: relative;</span></span><br><span class="line"><span class="regexp">  margin: 10px auto;</span></span><br><span class="line"><span class="regexp">  padding: 0;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">ul &#123;</span></span><br><span class="line"><span class="regexp">  list-style: none;</span></span><br><span class="line"><span class="regexp">  border-top: 1px solid #f0f0f0;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">li &#123;</span></span><br><span class="line"><span class="regexp">  text-align: left;</span></span><br><span class="line"><span class="regexp">  margin-top: 20px;</span></span><br><span class="line"><span class="regexp">  margin-bottom: 20px;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">.articleTitleLi &#123;</span></span><br><span class="line"><span class="regexp">  font-weight: bold;</span></span><br><span class="line"><span class="regexp">  font-size: 18px;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">.articleAbstractLi &#123;</span></span><br><span class="line"><span class="regexp">  width: 85%;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">.articleCreateDateLi &#123;</span></span><br><span class="line"><span class="regexp">  font-size: 13px;</span></span><br><span class="line"><span class="regexp">  color: #7c7a7a;</span></span><br><span class="line"><span class="regexp">  float: right;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">.viewArticleById &#123;</span></span><br><span class="line"><span class="regexp">  margin-top: 40px;</span></span><br><span class="line"><span class="regexp">  border: 1px solid #f0f0f0;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">a:hover &#123;</span></span><br><span class="line"><span class="regexp">  color: rgb(131, 130, 126);</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h4><h5 id="Entity"><a href="#Entity" class="headerlink" title="Entity"></a>Entity</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Article</span> </span>&#123;</span><br><span class="line">   <span class="comment">// 文章ID</span></span><br><span class="line">    <span class="keyword">private</span> String articleId;</span><br><span class="line">    <span class="comment">// 文章标题</span></span><br><span class="line">    <span class="keyword">private</span> String articleTitle;</span><br><span class="line">    <span class="comment">// 文章副标题</span></span><br><span class="line">    <span class="keyword">private</span> String articleAbstract;</span><br><span class="line">    <span class="comment">// 文章内容</span></span><br><span class="line">    <span class="keyword">private</span> String articleContent;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@JsonFormat</span>(pattern = <span class="string">"yyyy-MM-dd"</span>, timezone = <span class="string">"GMT+8"</span>)</span><br><span class="line">    <span class="keyword">private</span> Date articleCreateDate;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//get set方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Mapper"><a href="#Mapper" class="headerlink" title="Mapper"></a>Mapper</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ArticleMapper</span> <span class="keyword">extends</span> <span class="title">BaseMapper</span>&lt;<span class="title">Article</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">uploadArticle</span><span class="params">(@Param(<span class="string">"params"</span>)</span> Map&lt;String, Object&gt; params)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Article <span class="title">downloadArticleById</span><span class="params">(@Param(<span class="string">"params"</span>)</span> Map&lt;String, String&gt; params)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">List&lt;Article&gt; <span class="title">getArticleList</span><span class="params">(IPage page, @Param(<span class="string">"params"</span>)</span> Map&lt;String, Object&gt; params)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Mapper-xml"><a href="#Mapper-xml" class="headerlink" title="Mapper.xml"></a>Mapper.xml</h5><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper <span class="keyword">PUBLIC</span> <span class="string">"-//mybatis.org//DTD Mapper 3.0//EN"</span> <span class="string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span><br><span class="line">&lt;mapper <span class="keyword">namespace</span>=<span class="string">"com.base.modules.article.mapper.ArticleMapper"</span>&gt;</span><br><span class="line">    &lt;insert id=<span class="string">"uploadArticle"</span>&gt;</span><br><span class="line">        insert <span class="keyword">into</span> editor_article(article_title, article_abstract, article_content) values(</span><br><span class="line">        &lt;choose&gt;</span><br><span class="line">            &lt;<span class="keyword">when</span> test=<span class="string">"params.articleTitle != null"</span>&gt;</span><br><span class="line">                <span class="meta">#&#123;params.articleTitle&#125;,</span></span><br><span class="line">            &lt;/<span class="keyword">when</span>&gt;</span><br><span class="line">            &lt;otherwise&gt;</span><br><span class="line">                <span class="comment">'',</span></span><br><span class="line">            &lt;/otherwise&gt;</span><br><span class="line">        &lt;/choose&gt;</span><br><span class="line"></span><br><span class="line">        &lt;choose&gt;</span><br><span class="line">            &lt;<span class="keyword">when</span> test=<span class="string">"params.articleAbstract != null"</span>&gt;</span><br><span class="line">                <span class="meta">#&#123;params.articleAbstract&#125;,</span></span><br><span class="line">            &lt;/<span class="keyword">when</span>&gt;</span><br><span class="line">            &lt;otherwise&gt;</span><br><span class="line">                <span class="comment">'',</span></span><br><span class="line">            &lt;/otherwise&gt;</span><br><span class="line">        &lt;/choose&gt;</span><br><span class="line">        &lt;choose&gt;</span><br><span class="line">            &lt;<span class="keyword">when</span> test=<span class="string">"params.articleContent != null"</span>&gt;</span><br><span class="line">                <span class="meta">#&#123;params.articleContent&#125;</span></span><br><span class="line">            &lt;/<span class="keyword">when</span>&gt;</span><br><span class="line">            &lt;otherwise&gt;</span><br><span class="line">                <span class="comment">''</span></span><br><span class="line">            &lt;/otherwise&gt;</span><br><span class="line">        &lt;/choose&gt;</span><br><span class="line">        )</span><br><span class="line">    &lt;/insert&gt;</span><br><span class="line"></span><br><span class="line">    &lt;<span class="keyword">select</span> id=<span class="string">"getArticleList"</span> resultType=<span class="string">"com.base.modules.article.entity.Article"</span>&gt;</span><br><span class="line">        <span class="keyword">select</span> article_id, article_title, article_abstract, to_date(to_char(article_create_date, <span class="comment">'yyyy-MM-dd'), 'yyyy-MM-dd') as article_create_date from editor_article where del_flag = 1</span></span><br><span class="line">        &lt;<span class="keyword">if</span> test=<span class="string">"params.articleId == null || params.articleId.trim() != ''"</span>&gt;</span><br><span class="line">            <span class="keyword">and</span> article_id <span class="keyword">like</span> CONCAT(CONCAT(<span class="comment">'%',#&#123;params.articleId&#125;),'%')</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> test=<span class="string">"params.articleTitle == null || params.articleTitle.trim() != ''"</span>&gt;</span><br><span class="line">            <span class="keyword">and</span> article_title <span class="keyword">like</span> CONCAT(CONCAT(<span class="comment">'%',#&#123;params.articleTitle&#125;),'%')</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">    &lt;/<span class="keyword">select</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;<span class="keyword">select</span> id=<span class="string">"downloadArticleById"</span> resultType=<span class="string">"com.base.modules.article.entity.Article"</span> resultMap=<span class="string">"articleResult"</span>&gt;</span><br><span class="line">        <span class="keyword">select</span> article_content <span class="keyword">from</span> editor_article <span class="keyword">where</span> del_flag = <span class="number">1</span></span><br><span class="line">        &lt;<span class="keyword">if</span> test=<span class="string">"params.articleId == null || params.articleId.trim() != ''"</span>&gt;</span><br><span class="line">            <span class="keyword">and</span> article_id = <span class="meta">#&#123;params.articleId&#125;</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/<span class="keyword">select</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;resultMap id=<span class="string">"articleResult"</span> type=<span class="string">"com.base.modules.article.entity.Article"</span>&gt;</span><br><span class="line">        &lt;result <span class="keyword">property</span>=<span class="string">"articleContent"</span> column=<span class="string">"article_content"</span> javaType=<span class="string">"java.lang.String"</span> jdbcType=<span class="string">"CLOB"</span>&gt;&lt;/result&gt;</span><br><span class="line">    &lt;/resultMap&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ArticleService</span> <span class="keyword">extends</span> <span class="title">IService</span>&lt;<span class="title">Article</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">uploadArticle</span><span class="params">(Map&lt;String, Object&gt; params)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Page <span class="title">getArticleList</span><span class="params">(Map&lt;String, Object&gt; params)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Article <span class="title">downloadArticleById</span><span class="params">(Map&lt;String, String&gt; params)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">String <span class="title">uploadImage</span><span class="params">(MultipartFile uploadFile, HttpServletRequest request)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="ServiceImpl"><a href="#ServiceImpl" class="headerlink" title="ServiceImpl"></a>ServiceImpl</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArticleServiceImpl</span> <span class="keyword">extends</span> <span class="title">ServiceImpl</span>&lt;<span class="title">ArticleMapper</span>, <span class="title">Article</span>&gt; <span class="keyword">implements</span> <span class="title">ArticleService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;upload.path&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String imagesPath;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件的真实路径</span></span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;file.uploadFolder&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String realBasePath;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;file.accessPath&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String accessPath;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">uploadArticle</span><span class="params">(Map&lt;String, Object&gt; params)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> baseMapper.uploadArticle(params);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Page <span class="title">getArticleList</span><span class="params">(Map&lt;String, Object&gt; params)</span></span>&#123;</span><br><span class="line">        Page&lt;Article&gt; page = <span class="keyword">new</span> Query&lt;Article&gt;(params).getPage();</span><br><span class="line">        List&lt;Article&gt; articleList = baseMapper.getArticleList(page, params);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> page.setRecords(articleList);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Article <span class="title">downloadArticleById</span><span class="params">(Map&lt;String, String&gt; params)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> baseMapper.downloadArticleById(params);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">uploadImage</span><span class="params">(MultipartFile uploadFile, HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">        Date todayDate = <span class="keyword">new</span> Date();</span><br><span class="line">        SimpleDateFormat dateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);</span><br><span class="line">        String today = dateFormat.format(todayDate);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 域名访问的相对路径（通过浏览器访问的链接-虚拟路径）</span></span><br><span class="line">        String saveToPath = accessPath + today + <span class="string">"/"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 真实路径，实际储存的路径</span></span><br><span class="line">        String realPath = realBasePath + today + <span class="string">"/"</span>;</span><br><span class="line"></span><br><span class="line">        String fileName = uploadFile.getOriginalFilename();</span><br><span class="line">        String suffix = fileName.substring(fileName.lastIndexOf(<span class="string">"."</span>)).toLowerCase();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (suffix.equals(<span class="string">".jpg"</span>) || suffix.equals(<span class="string">".jpeg"</span>) || suffix.equals(<span class="string">".png"</span>)) &#123;</span><br><span class="line">            fileName = UpImagesUtils.getPhotoName(<span class="string">"img"</span>, suffix);</span><br><span class="line">            <span class="comment">// 储存文件的物理路径，使用本地路径储存</span></span><br><span class="line">            String filepath = realPath + fileName;</span><br><span class="line">            File targetFile = <span class="keyword">new</span> File(filepath);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!targetFile.getParentFile().exists()) &#123;</span><br><span class="line">                targetFile.getParentFile().mkdirs();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 保存</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                uploadFile.transferTo(targetFile);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        String returnUrl = request.getScheme() + <span class="string">"://"</span></span><br><span class="line">                + request.getServerName() + <span class="string">":"</span> + request.getServerPort()</span><br><span class="line">                + request.getContextPath() + saveToPath + fileName;</span><br><span class="line">        <span class="keyword">return</span> returnUrl;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/article"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArticleController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ArticleService articleService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/uploadArticle"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">uploadArticle</span><span class="params">(@RequestParam Map&lt;String, Object&gt; params)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> articleService.uploadArticle(params);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/getArticleList"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Page <span class="title">getArticleList</span><span class="params">(@RequestParam Map&lt;String, Object&gt; params)</span></span>&#123;</span><br><span class="line">        System.out.println(params);</span><br><span class="line">        <span class="keyword">return</span> articleService.getArticleList(params);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/downloadArticleById"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Article <span class="title">downloadArticleById</span><span class="params">(@RequestParam Map&lt;String, String&gt; params)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> articleService.downloadArticleById(params);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/uploadImage"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">uploadImage</span><span class="params">(@RequestParam(value = <span class="string">"file"</span>)</span> MultipartFile uploadFile, HttpServletRequest request) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> articleService.uploadImage(uploadFile, request);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="yml文件中设置图片地址映射相关信息"><a href="#yml文件中设置图片地址映射相关信息" class="headerlink" title="yml文件中设置图片地址映射相关信息"></a>yml文件中设置图片地址映射相关信息</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 上传的服务器上的映射文件夹</span></span><br><span class="line"><span class="attr">file.accessPath:</span></span><br><span class="line">  <span class="string">/upload/images/</span></span><br><span class="line">  <span class="comment">#静态资源对外暴露的访问路径</span></span><br><span class="line"><span class="attr">file.staticAccessPath:</span></span><br><span class="line">  <span class="string">/upload/images/**</span></span><br><span class="line"><span class="comment">#文件上传目录</span></span><br><span class="line"><span class="attr">file.uploadFolder:</span></span><br><span class="line">  <span class="string">D:\\ProjectFile\\YSDMFile\\upload\\images\\</span></span><br></pre></td></tr></table></figure>
+<h4 id="数据库端"><a href="#数据库端" class="headerlink" title="数据库端"></a>数据库端</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> EDITOR_ARTICLE</span><br><span class="line">(</span><br><span class="line">  article_id          <span class="built_in">VARCHAR2</span>(<span class="number">64</span>) <span class="keyword">default</span> sys_guid() <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">  article_title       <span class="built_in">VARCHAR2</span>(<span class="number">1000</span>),</span><br><span class="line">  article_abstract    <span class="built_in">VARCHAR2</span>(<span class="number">3000</span>),</span><br><span class="line">  article_content     <span class="keyword">CLOB</span>,</span><br><span class="line">  article_create_date <span class="built_in">DATE</span> <span class="keyword">default</span> <span class="keyword">sysdate</span>,</span><br><span class="line">  article_update_date <span class="built_in">DATE</span>,</span><br><span class="line">  del_flag            <span class="built_in">VARCHAR2</span>(<span class="number">10</span>) <span class="keyword">default</span> <span class="number">1</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/Feng404">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+
+            <span class="label">GitHub</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://weibo.com/般若F">
+            <span class="icon">
+              <i class="fa fa-weibo"></i>
+            </span>
+
+            <span class="label">Weibo</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue2-Editor/" rel="tag"><i class="fa fa-tag"></i> Vue2-Editor</a>
+              <a href="/tags/SpringBoot/" rel="tag"><i class="fa fa-tag"></i> SpringBoot</a>
+              <a href="/tags/Oracle/" rel="tag"><i class="fa fa-tag"></i> Oracle</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/03/Java%E4%B8%ADList-add%E6%96%B9%E6%B3%95%E6%95%B0%E6%8D%AE%E8%A2%AB%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="prev" title="Java中List add方法数据被覆盖问题解决">
+      <i class="fa fa-chevron-left"></i> Java中List add方法数据被覆盖问题解决
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现效果"><span class="nav-number">1.</span> <span class="nav-text">实现效果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文章上传页面"><span class="nav-number">1.1.</span> <span class="nav-text">文章上传页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章列表页面"><span class="nav-number">1.2.</span> <span class="nav-text">文章列表页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看文章详细信息"><span class="nav-number">1.3.</span> <span class="nav-text">查看文章详细信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现过程"><span class="nav-number">2.</span> <span class="nav-text">实现过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前端"><span class="nav-number">2.1.</span> <span class="nav-text">前端</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#文章上传页面-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">文章上传页面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文章列表页面-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">文章列表页面</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后端"><span class="nav-number">2.2.</span> <span class="nav-text">后端</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Entity"><span class="nav-number">2.2.1.</span> <span class="nav-text">Entity</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Mapper"><span class="nav-number">2.2.2.</span> <span class="nav-text">Mapper</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Mapper-xml"><span class="nav-number">2.2.3.</span> <span class="nav-text">Mapper.xml</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Service"><span class="nav-number">2.2.4.</span> <span class="nav-text">Service</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ServiceImpl"><span class="nav-number">2.2.5.</span> <span class="nav-text">ServiceImpl</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Controller"><span class="nav-number">2.2.6.</span> <span class="nav-text">Controller</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#yml文件中设置图片地址映射相关信息"><span class="nav-number">2.2.7.</span> <span class="nav-text">yml文件中设置图片地址映射相关信息</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库端"><span class="nav-number">2.3.</span> <span class="nav-text">数据库端</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="kalinda"
+      src="https://cn.bing.com/th?id=OIP.UDMxZWKA43MAVttEe4-v9gAAAA&pid=Api&rs=1">
+  <p class="site-author-name" itemprop="name">kalinda</p>
+  <div class="site-description" itemprop="description">知世故而不世故，才是最善良的成熟</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Feng404" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Feng404" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kalindafeng@gmail.com" title="E-Mail → mailto:kalindafeng@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kalinda</span>
+</div>
+  <span class="post-meta-divider"></span>
+  <div class="theme-info">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+    本站总访问量 <span id="busuanzi_value_site_pv">
+    </span> 次</span>
+    
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
