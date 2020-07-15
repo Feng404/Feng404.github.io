@@ -130,17 +130,17 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">6</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">10</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">11</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">7</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">8</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -200,6 +200,84 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/15/IDEA%E4%B8%8B%E7%BB%99%E7%B1%BB%E5%92%8C%E6%96%B9%E6%B3%95%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E6%B3%A8%E9%87%8A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cn.bing.com/th?id=OIP.UDMxZWKA43MAVttEe4-v9gAAAA&pid=Api&rs=1">
+      <meta itemprop="name" content="kalinda">
+      <meta itemprop="description" content="知世故而不世故，才是最善良的成熟">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DayLight">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/15/IDEA%E4%B8%8B%E7%BB%99%E7%B1%BB%E5%92%8C%E6%96%B9%E6%B3%95%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E6%B3%A8%E9%87%8A/" class="post-title-link" itemprop="url">IDEA下给类和方法自动创建注释</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-15 09:39:08 / 修改时间：09:46:54" itemprop="dateCreated datePublished" datetime="2020-07-15T09:39:08+08:00">2020-07-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IDE%E6%8A%80%E5%B7%A7/" itemprop="url" rel="index"><span itemprop="name">IDE技巧</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="生成类时自动生成注释"><a href="#生成类时自动生成注释" class="headerlink" title="生成类时自动生成注释"></a>生成类时自动生成注释</h3><h5 id="右击File打开Settings或者使用快捷键-Ctrl-Alt-S"><a href="#右击File打开Settings或者使用快捷键-Ctrl-Alt-S" class="headerlink" title="右击File打开Settings或者使用快捷键(Ctrl+Alt+S)"></a>右击File打开Settings或者使用快捷键(Ctrl+Alt+S)</h5><p><img src="https://img-blog.csdnimg.cn/20200714164130220.png" alt="图1"></p>
+<h5 id="打开Settings后，在输入框搜索File-and-Code-Template"><a href="#打开Settings后，在输入框搜索File-and-Code-Template" class="headerlink" title="打开Settings后，在输入框搜索File and Code Template"></a>打开Settings后，在输入框搜索File and Code Template</h5><p><img src="https://img-blog.csdnimg.cn/20200714163358567.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZpbmFsbHlfZmx4,size_16,color_FFFFFF,t_70" alt="图2"></p>
+<h5 id="在Files-gt-Class-内部添加注释模板"><a href="#在Files-gt-Class-内部添加注释模板" class="headerlink" title="在Files -&gt; Class 内部添加注释模板"></a>在Files -&gt; Class 内部添加注释模板</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   *ClassName   $&#123;NAME&#125;</span></span><br><span class="line"><span class="comment">   *Description TODO</span></span><br><span class="line"><span class="comment">   *Author  YourName</span></span><br><span class="line"><span class="comment">   *Date  $&#123;DATE&#125; $&#123;TIME&#125;</span></span><br><span class="line"><span class="comment">   *Version 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h5 id="点击Apply或者OK即可生效，Interface类似"><a href="#点击Apply或者OK即可生效，Interface类似" class="headerlink" title="点击Apply或者OK即可生效，Interface类似"></a>点击Apply或者OK即可生效，Interface类似</h5><h3 id="添加方法注释"><a href="#添加方法注释" class="headerlink" title="添加方法注释"></a>添加方法注释</h3><h5 id="进入Settings后在搜索框内输入Live-Template"><a href="#进入Settings后在搜索框内输入Live-Template" class="headerlink" title="进入Settings后在搜索框内输入Live Template"></a>进入Settings后在搜索框内输入Live Template</h5><p><img src="https://img-blog.csdnimg.cn/20200714163516247.png" alt="图4"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/15/IDEA%E4%B8%8B%E7%BB%99%E7%B1%BB%E5%92%8C%E6%96%B9%E6%B3%95%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E6%B3%A8%E9%87%8A/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -827,20 +905,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
